@@ -13,11 +13,60 @@ the function below should be the only one in this file.
 #include "split.h"
 
 /* Add a prototype for a helper function here if you need */
+void move_node(Node*& list, Node*& item);
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
-// WRITE YOUR CODE HERE
+  // base case if in is null
+  if (in != nullptr) { 
+    
+    // create temporary next_node variable so we can change current 
+    // node (in) to point at null, allowing us to safely add to the 
+    // end of the appropriate list 
+    Node* next_node = in->next;
+    in->next = nullptr;
+
+    // then add the node to the correct list and 
+    // call split recursively
+
+    // even case
+    if (in->value % 2 == 0) { 
+      if (evens == nullptr) { // list empty
+        evens = in;
+      }
+      else {
+        evens->next = in;
+      }
+
+      split(next_node, odds, evens->next);
+    }
+    
+    // odd case
+    else {
+      move_node(odds, in);
+    }
+  }
 }
 
+
 /* If you needed a helper function, write it here */
+
+// void move_node(Node*& list, Node*& item)
+// {
+//   item->next = nullptr;
+
+//   // base case 1: list is empty
+//   if (list == nullptr) {
+//     list = item;
+//   }
+
+//   // base case 2: list not empty
+//   else if (list->next == nullptr) {
+//     list->next = item;
+//   }
+
+//   // recursive case
+//   else {
+//     move_node(list->next, item);
+//   }
+// }
