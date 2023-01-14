@@ -11,6 +11,8 @@ the function below should be the only one in this file.
 */
 
 #include "split.h"
+#include <iostream>
+#include <cassert>
 
 /* Add a prototype for a helper function here if you need */
 void move_node(Node*& list, Node*& item);
@@ -24,27 +26,36 @@ void split(Node*& in, Node*& odds, Node*& evens)
     // node (in) to point at null, allowing us to safely add to the 
     // end of the appropriate list 
     Node* next_node = in->next;
-    in->next = nullptr;
+    in->next = nullptr; 
 
     // then add the node to the correct list and 
     // call split recursively
 
     // even case
     if (in->value % 2 == 0) { 
-      if (evens == nullptr) { // list empty
+      if (evens == nullptr) { // even list empty
         evens = in;
+        split(next_node, odds, evens);
       }
       else {
         evens->next = in;
+        split(next_node, odds, evens->next);
       }
-
-      split(next_node, odds, evens->next);
     }
     
     // odd case
     else {
-      move_node(odds, in);
+      if (odds == nullptr) { // odds list empty
+        odds = in;
+        split(next_node, odds, evens);
+      }
+      else {
+        odds->next = in;
+        split(next_node, odds->next, evens);
+      }
     }
+
+    in = nullptr;
   }
 }
 

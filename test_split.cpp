@@ -13,7 +13,7 @@ g++ split.cpp test_split.cpp -o test_split
 
 using namespace std;
 
-// linked list helper functions
+// linked list manager functions
 void push_front(Node*& head, int val);
 void pop_front(Node*& head);
 void print_list(Node*& head);
@@ -21,10 +21,7 @@ void delete_list(Node*& head);
 
 int main(int argc, char* argv[])
 {
-  Node* mylist = new Node(4, nullptr);
-  push_front(mylist, 3);
-  push_front(mylist, 2);
-  push_front(mylist, 1);
+  Node* mylist = nullptr;
 
   cout << "initialized list:" << endl;
   print_list(mylist);
@@ -43,9 +40,9 @@ int main(int argc, char* argv[])
   cout << "Original list: " << endl;
   print_list(mylist);
 
+  delete_list(mylist);
   delete_list(evens);
   delete_list(odds);
-  delete_list(mylist);
 
   return 0;
 }
