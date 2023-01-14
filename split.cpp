@@ -11,8 +11,6 @@ the function below should be the only one in this file.
 */
 
 #include "split.h"
-#include <iostream>
-#include <cassert>
 
 /* Add a prototype for a helper function here if you need */
 void move_node(Node*& list, Node*& item);

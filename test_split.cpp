@@ -21,7 +21,11 @@ void delete_list(Node*& head);
 
 int main(int argc, char* argv[])
 {
-  Node* mylist = nullptr;
+  Node* mylist = new Node(12, nullptr);
+
+  for (int i=10; i >= 0; i-=2) {
+    push_front(mylist, i);
+  }
 
   cout << "initialized list:" << endl;
   print_list(mylist);
