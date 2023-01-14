@@ -27,6 +27,11 @@ class ULListStr {
       first = last = 0;
       prev = next = NULL;
     }
+
+    size_t size() const
+    {
+      return last - first;
+    }
   };
 
   /**
@@ -77,6 +82,11 @@ class ULListStr {
    *   - MUST RUN in O(1)
    */
   void pop_front();
+
+  /**
+   * Prints list of strings separated by char
+  */
+  void print(char separator = ' ');
   
   /**
    * Returns a const reference to the back element
