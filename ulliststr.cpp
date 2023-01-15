@@ -138,9 +138,10 @@ void ULListStr::pop_back()
   }
 }
 
+
+
 void ULListStr::pop_front()
 {
-  // ensure list is not empty
   if (!empty()) {
 
     // case 1: only one value in the first Item struct
@@ -177,7 +178,7 @@ void ULListStr::print(char separator)
   Item* curr = head_;
   while (curr != nullptr) {
     for (size_t i = curr->first; i < curr->last; i++) {
-      std::cout << curr->val[i] << separator << std::endl;
+      std::cout << curr->val[i] << separator;
     }
     curr = curr->next;
   }
@@ -201,7 +202,7 @@ std::string* ULListStr::getValAtLoc(size_t loc) const
   }
   
   // determine which node the given index is in
-  size_t offset = ARRSIZE - head_->size();
+  size_t offset = head_->first;
   size_t node_index = (loc + offset) / ARRSIZE;
 
   // walk the list until we reach the wanted node
@@ -211,7 +212,13 @@ std::string* ULListStr::getValAtLoc(size_t loc) const
   }
 
   // get the index of the item within the desired node
-  size_t val_index = (loc % ARRSIZE + offset);
+  // BUG FOUND: size_t val_index = loc % ARRSIZE + offset;
+  size_t val_index = (loc + offset) % ARRSIZE;
+
+  #ifdef DEBUG
+    std::cout << "getVAlAtLoc() returns pointer to " << *(curr->val + val_index) << std::endl;
+  #endif
+
   return curr->val + val_index;
 }
 

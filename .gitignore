@@ -4,3 +4,4 @@ test_split
 test_ulliststr
 split.o
 .vscode
+failed_tests.txt
